@@ -2,11 +2,12 @@
 
 case $1 in
 clear)
-    rm App.jar App.class
+    rm * target/classes
+    rm target/App.jar
     ;;
 
 build)
-    javac App.javac
+    javac -cp serc -d target/classes src/App.java
     ;;
 
 package)
