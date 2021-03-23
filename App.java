@@ -2,12 +2,14 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 
 public class App {
 	public static void main(String[] args) {
 		System.out.println("Starting server...");
 
 		try {
+
 			ServerSocket server = new ServerSocket(8080);
 			Socket connection = server.accept();
 			OutputStream response = connection.getOutputStream();
@@ -20,13 +22,16 @@ public class App {
 			body += "\r\n";
 			body += content;
 
-			response.write(body.getBytes("UTF-8"));
+			response.write(body.getBytes(StandardCharsets.UTF_8));
 
 			response.flush();
+			
 			server.close();
 
 		} catch(IOException ex) {
 			ex.printStackTrace();
+		} finally {
+			
 		}
 	}
 }
